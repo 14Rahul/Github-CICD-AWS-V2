@@ -4,7 +4,7 @@ kind: Ingress
 metadata:
   name: {{ .Release.Name }}-internal
   annotations:
-    alb.ingress.kubernetes.io/scheme: internal
+    alb.ingress.kubernetes.io/scheme: internet-facing #internal
     alb.ingress.kubernetes.io/group.name: {{ .Values.ingress.InternalIngress.groupname }}
     alb.ingress.kubernetes.io/listen-ports: {{ .Values.ingress.InternalIngress.listenerport }}
     alb.ingress.kubernetes.io/certificate-arn: {{ .Values.ingress.InternalIngress.certificatearn }}
