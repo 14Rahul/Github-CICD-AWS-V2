@@ -99,6 +99,7 @@ ingress:
     enabled: true # Set to True to create external ALB
     groupname: internalapis # options are internalapis, apps-prod, apps-dev, apps-qa, apps-staging
     listenerport: "\'[{\"HTTP\": 80}]\'"  # Remove if port is not required
+    certificatearn:
     healthcheckpath: / # Add the Healthcheck path of application
     subnets: subnet-070c2a5fa670fca26, subnet-009d77b0ae2be30fa # Mention the subnets for the ingress
     rules:
