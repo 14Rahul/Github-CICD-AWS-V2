@@ -96,14 +96,13 @@ ingress:
                 port:
                   number: 80
   ExternalIngress:
-    enabled: false # Set to True to create external ALB
+    enabled: true # Set to True to create external ALB
     groupname: internalapis # options are internalapis, apps-prod, apps-dev, apps-qa, apps-staging
     listenerport: "\'[{\"HTTP\": 80}]\'"  # Remove if port is not required
-    healthcheckpath: /api/v1/hello-world/health # Add the Healthcheck path of application
-    subnets: subnet-0b87eadae8dbb2bc3, subnet-093cde2200557dd76 # Mention the subnets for the ingress
+    healthcheckpath: / # Add the Healthcheck path of application
+    subnets: subnet-070c2a5fa670fca26, subnet-009d77b0ae2be30fa # Mention the subnets for the ingress
     rules:
-      - host: app.example.com # Remove the line if hostname is not required
-        http:
+      - http:
           paths:
           - path: / # Add the application path of application
             pathType: Prefix
