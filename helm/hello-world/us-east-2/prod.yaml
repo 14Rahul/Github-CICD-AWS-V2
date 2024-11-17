@@ -4,7 +4,7 @@ deployment:
     repository: 337909738694.dkr.ecr.us-east-2.amazonaws.com/hello-world
     tag: "prod-latest"
     pullPolicy: Always
-  containerPort: 8080
+  containerPort: 80
   serviceAccountName: ""
   command: []  # ["python", "app.py"]
   volumeMounts:
