@@ -8,12 +8,12 @@ deployment:
   serviceAccountName: ""
   command: []  # ["python", "app.py"]
   volumeMounts:
-  - name: efs-development  # Should be in format <DeploymentName-volume>
-    mountPath: /mnt/efs/tmp
+  # - name: efs-development  # Should be in format <DeploymentName-volume>
+  #   mountPath: /mnt/efs/tmp
   volumes:
-  - name: efs-development  # Should be in format <DeploymentName-volume>
-    claimName: efs-cupid-claim-tmp #  Should be in format <DeploymentName-claim>
-  nodeSelector: {role: internalapi}
+  # - name: efs-development  # Should be in format <DeploymentName-volume>
+  #   claimName: efs-cupid-claim-tmp #  Should be in format <DeploymentName-claim>
+  nodeSelector: {role: workers}
   affinity: {}
   tolerations: [
   #  - key: "node-role"
@@ -23,11 +23,11 @@ deployment:
   ]
   resources:
     limits:
-      memory: "800Mi"
-      cpu: "1"
+      memory: "100Mi"
+      cpu: "100m"
     requests:
       cpu: "100m"
-      memory: "300Mi"
+      memory: "100Mi"
   extraEnv:
     S3_BUCKET: "prodigaltech-cupid-data"
     REDIS_HOST: "master.cupid.ljl3mh.use2.cache.amazonaws.com"
@@ -96,7 +96,7 @@ ingress:
                 port:
                   number: 80
   ExternalIngress:
-    enabled: true # Set to True to create external ALB
+    enabled: false # Set to True to create external ALB
     groupname: internalapis # options are internalapis, apps-prod, apps-dev, apps-qa, apps-staging
     listenerport: "\'[{\"HTTP\": 80}]\'"  # Remove if port is not required
     healthcheckpath: /api/v1/hello-world/health # Add the Healthcheck path of application
