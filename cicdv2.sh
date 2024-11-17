@@ -79,7 +79,7 @@ check_main_branch(){
 
 build_and_push_image() {
 
-  ecr_repo_uri="532968567499.dkr.ecr.$REGION.amazonaws.com/$SERVICE"
+  ecr_repo_uri="337909738694.dkr.ecr.$REGION.amazonaws.com/$SERVICE"
   
   cd "$REPO_HOME/repo/" || log_and_exit "Failed to change to repo directory"
   echo "Logging in to AWS ECR"
@@ -101,13 +101,13 @@ build_and_push_image() {
 
 deploy() {
     echo "Deploying $SERVICE to $ENV"
-    cd "$REPO_HOME/aws-code/helm"
+    cd "$REPO_HOME/Github-CICD-AWS-V2/helm"
     helm upgrade --install "$SERVICE" golden-helm-chart -f "$SERVICE/$REGION/$ENV.yaml" --set deployment.image.tag="$IMAGE_TAG" -n "$NAMESPACE" --create-namespace --wait --timeout 150s || log_and_exit "Helm upgrade failed"
 }
 
 deploy_only() {
     echo "Deploying $SERVICE to $ENV"
-    cd "$REPO_HOME/aws-code/helm"
+    cd "$REPO_HOME/Github-CICD-AWS-V2/helm"
     helm upgrade --install "$SERVICE" golden-helm-chart -f "$SERVICE/$REGION/$ENV.yaml" --set deployment.image.tag="$IMAGE_TAG" -n "$NAMESPACE" --create-namespace --force --wait --timeout 300s || log_and_exit "Helm upgrade failed"
 }
 
