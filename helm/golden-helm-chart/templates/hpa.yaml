@@ -1,0 +1,17 @@
+{{- if .Values.autoscaling.enabled }}
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: {{ .Release.Name }}-scaledobject
+spec:
+  scaleTargetRef:
+    name: {{ .Release.Name }}
+  {{- if .Values.autoscaling.minReplicaCount }}
+  minReplicaCount: {{ .Values.autoscaling.minReplicaCount }}
+  {{- end }}
+  {{- if .Values.autoscaling.maxReplicaCount }}
+  maxReplicaCount: {{ .Values.autoscaling.maxReplicaCount }}
+  {{- end }}
+  triggers:
+  {{- toYaml .Values.autoscaling.triggers | nindent 2 }}
+{{- end }}
